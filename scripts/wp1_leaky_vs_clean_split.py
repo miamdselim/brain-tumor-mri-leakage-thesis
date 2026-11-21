@@ -178,19 +178,26 @@ VALID_EXT = (".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff")
 def find_root(preferred):
     if os.path.isdir(preferred):
         return preferred
-    search = ["/kaggle/input"]
-    if not any(os.scandir("/kaggle/input")) if os.path.isdir("/kaggle/input") else True:
-        # No dataset attached: download the public dataset directly (needs Internet ON)
-        try:
-            import kagglehub
-            search.append(kagglehub.dataset_download("masoudnickparvar/brain-tumor-mri-dataset"))
-            print("Dataset downloaded with kagglehub ->", search[-1])
-        except Exception as e:
-            print("kagglehub download failed:", e)
-    for base in search:
+
+    def search(base):
         for r, d, _ in os.walk(base):
-            if any(x.lower() == "training" for x in d):
+            if any(x.lower() == "training" for x in d) and any(x.lower() == "testing" for x in d):
                 return r
+        return None
+
+    root = search("/kaggle/input")
+    if root:
+        return root
+    # Dataset not attached: download the public dataset directly (needs Internet ON)
+    try:
+        import kagglehub
+        path = kagglehub.dataset_download("masoudnickparvar/brain-tumor-mri-dataset")
+        print("Dataset downloaded with kagglehub ->", path)
+        root = search(path)
+    except Exception as e:
+        print("kagglehub download failed:", e)
+    if root:
+        return root
     raise FileNotFoundError("Dataset not found. Attach it with Add Input, or turn Internet ON.")
 
 
