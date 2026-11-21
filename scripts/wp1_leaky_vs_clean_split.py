@@ -829,8 +829,20 @@ print(f"\n📦 Saved: {zip_path} — download it from the Output panel.")
 #   (b) unseen accuracy re-weighted to the class mix of the leaked images
 #   (c) 1-NN memoriser accuracy per class (source-bias check)
 #   (d) official-test glioma errors
-# Run it in the same session, after CELL 11.
+# Works in two ways:
+#   • same session, right after CELL 11; or
+#   • after a restart: run CELLS 1–6 only (≈ 3 min, no training), then this cell.
+#     CNN predictions are then loaded from wp1_outputs/tables/test_probs_protocol_*.npy if they still exist.
 # ============================================================
+if "CNN" not in globals() or not all(k in CNN for k in SPLITS):
+    CNN = {}
+    for k in SPLITS:
+        f = os.path.join(TAB_DIR, f"test_probs_protocol_{k}.npy")
+        if os.path.exists(f):
+            CNN[k] = {"probs": np.load(f)}
+HAVE_CNN = all(k in CNN for k in SPLITS)
+print("CNN predictions available:", HAVE_CNN,
+      "" if HAVE_CNN else "→ running the 1-NN parts only (CNN files were deleted with the old session)")
 from scipy.stats import fisher_exact
 try:
     from statsmodels.stats.contingency_tables import StratifiedTable
@@ -843,7 +855,8 @@ per_class_rows, test_rows = [], []
 for k in ("A", "B"):
     te = SPLITS[k][SPLITS[k].split == "test"]
     y, leaked = label_ids(te), te["dup_in_dev"].to_numpy()
-    for model, pred in (("CNN", CNN[k]["probs"].argmax(1)), ("1-NN", NN[k]["pred"])):
+    models = ([("CNN", CNN[k]["probs"].argmax(1))] if HAVE_CNN else []) + [("1-NN", NN[k]["pred"])]
+    for model, pred in models:
         ok = pred == y
         tables, w, acc_u = [], [], []
         for c, cn in enumerate(CLASSES):
@@ -919,10 +932,11 @@ ax.legend(loc="upper center", ncol=3, fontsize=8, frameon=False); ax.grid(axis="
 plt.tight_layout()
 save_fig("fig_wp1_nn_per_class")
 
-# ---- class-stratified leaked vs unseen figure (CNN) ----
+# ---- class-stratified leaked vs unseen figure ----
+FIG_MODEL = "CNN" if HAVE_CNN else "1-NN"
 fig, ax = plt.subplots(1, 2, figsize=(13, 4.4), sharey=True)
 for a, k in zip(ax, ("A", "B")):
-    sub = PER_CLASS[(PER_CLASS.Protocol == k) & (PER_CLASS.Model == "CNN")]
+    sub = PER_CLASS[(PER_CLASS.Protocol == k) & (PER_CLASS.Model == FIG_MODEL)]
     x = np.arange(len(sub))
     for j, (col, nm, colr) in enumerate([("Leaked acc (%)", "leaked", "#C44E52"),
                                           ("Unseen acc (%)", "unseen", "#55A868")]):
@@ -931,41 +945,45 @@ for a, k in zip(ax, ("A", "B")):
         b = a.bar(x + (j - 0.5) * 0.38, v, 0.38, color=colr, edgecolor="black", label=nm)
         a.bar_label(b, labels=[f"{vv:.1f}\nn={nn}" if nn else "–" for vv, nn in zip(v, n)], fontsize=7, padding=2)
     a.set_xticks(x); a.set_xticklabels(sub["Class"]); a.set_ylim(0, 115)
-    a.set_title(f"{PROTOCOLS[k]}: CNN accuracy by class"); a.grid(axis="y", alpha=0.3)
+    a.set_title(f"{PROTOCOLS[k]}: {FIG_MODEL} accuracy by class"); a.grid(axis="y", alpha=0.3)
 ax[0].set_ylabel("Test accuracy (%)"); ax[0].legend(loc="lower left")
 plt.tight_layout()
 save_fig("fig_wp1_leaked_vs_unseen_per_class")
 
-# ---- (d) official-test glioma errors ----
-teA = SPLITS["A"][SPLITS["A"].split == "test"].reset_index(drop=True)
-yA, pA = label_ids(teA), CNN["A"]["probs"].argmax(1)
-g = CIDX["glioma"]
-gm = yA == g
-wrong_g = np.where(gm & (pA != g))[0]
-simA = NN["A"]["sim"]
-EXTRA["official_glioma"] = {
-    "test_gliomas": int(gm.sum()), "wrong": int(len(wrong_g)),
-    "predicted_as": {CLASS_TITLES[CLASSES[c]]: int((pA[wrong_g] == c).sum()) for c in range(4) if c != g},
-    "wrong_that_are_leaked": int(teA.loc[wrong_g, "dup_in_dev"].sum()),
-    "median_nearest_sim_wrong": float(np.median(simA[wrong_g])) if len(wrong_g) else None,
-    "median_nearest_sim_correct": float(np.median(simA[gm & (pA == g)])),
-}
-print("\n(d) Official-test gliomas:", json.dumps(EXTRA["official_glioma"], indent=2))
+# ---- (d) official-test glioma errors (CNN only) ----
+if HAVE_CNN:
+    teA = SPLITS["A"][SPLITS["A"].split == "test"].reset_index(drop=True)
+    yA, pA = label_ids(teA), CNN["A"]["probs"].argmax(1)
+    g = CIDX["glioma"]
+    gm = yA == g
+    wrong_g = np.where(gm & (pA != g))[0]
+    simA = NN["A"]["sim"]
+    EXTRA["official_glioma"] = {
+        "test_gliomas": int(gm.sum()), "wrong": int(len(wrong_g)),
+        "predicted_as": {CLASS_TITLES[CLASSES[c]]: int((pA[wrong_g] == c).sum()) for c in range(4) if c != g},
+        "wrong_that_are_leaked": int(teA.loc[wrong_g, "dup_in_dev"].sum()),
+        "median_nearest_sim_wrong": float(np.median(simA[wrong_g])) if len(wrong_g) else None,
+        "median_nearest_sim_correct": float(np.median(simA[gm & (pA == g)])),
+    }
+    print("\n(d) Official-test gliomas:", json.dumps(EXTRA["official_glioma"], indent=2))
 
-if len(wrong_g):
-    show = wrong_g[np.argsort(simA[wrong_g])][:8]
-    cols = min(4, len(show)); rws = int(np.ceil(len(show) / cols))
-    fig, ax = plt.subplots(rws, cols, figsize=(3.4 * cols, 3.9 * rws))
-    ax = np.array(ax).reshape(-1)
-    for a in ax:
-        a.axis("off")
-    for a, i in zip(ax, show):
-        a.imshow(cv2.cvtColor(cv2.imread(teA.loc[i, "path"]), cv2.COLOR_BGR2RGB))
-        a.set_title(f"Glioma → {CLASS_TITLES[CLASSES[pA[i]]]}\nnearest-train r = {simA[i]:.2f}", fontsize=9, color="red")
-    plt.suptitle("Official test: misclassified gliomas (least similar to training first)", fontweight="bold")
-    plt.tight_layout()
-    save_fig("fig_wp1_official_glioma_errors")
+    if len(wrong_g):
+        show = wrong_g[np.argsort(simA[wrong_g])][:8]
+        cols = min(4, len(show)); rws = int(np.ceil(len(show) / cols))
+        fig, ax = plt.subplots(rws, cols, figsize=(3.4 * cols, 3.9 * rws))
+        ax = np.array(ax).reshape(-1)
+        for a in ax:
+            a.axis("off")
+        for a, i in zip(ax, show):
+            a.imshow(cv2.cvtColor(cv2.imread(teA.loc[i, "path"]), cv2.COLOR_BGR2RGB))
+            a.set_title(f"Glioma → {CLASS_TITLES[CLASSES[pA[i]]]}\nnearest-train r = {simA[i]:.2f}", fontsize=9, color="red")
+        plt.suptitle("Official test: misclassified gliomas (least similar to training first)", fontweight="bold")
+        plt.tight_layout()
+        save_fig("fig_wp1_official_glioma_errors")
 
+
+if "RESULTS" not in globals():
+    RESULTS = {}
 RESULTS["extra_analysis"] = EXTRA
 save_results()
 zip_path = shutil.make_archive(os.path.join(CFG["WORK_DIR"], "wp1_outputs"), "zip", OUT_DIR)
