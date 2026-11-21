@@ -9,6 +9,9 @@
 #   • after a restart: run CELLS 1–6 only (≈ 3 min, no training), then this cell.
 #     CNN predictions are then loaded from wp1_outputs/tables/test_probs_protocol_*.npy if they still exist.
 # ============================================================
+if "SPLITS" not in globals() or "NN" not in globals():
+    raise RuntimeError("⚠️ First run CELL 1, 2, 3, 4, 5 and 6 (in order), then run this cell again.")
+
 if "CNN" not in globals() or not all(k in CNN for k in SPLITS):
     CNN = {}
     for k in SPLITS:
