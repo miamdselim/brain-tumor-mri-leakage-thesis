@@ -40,7 +40,7 @@ references/  references.bib and references.ris (import into Zotero)
 
 | WP | Question | Status |
 |---|---|---|
-| WP1 | How much does leakage inflate accuracy? (official vs random vs group-aware split) | notebook ready |
+| WP1 | How much does leakage inflate accuracy? (official vs random vs group-aware split) | done — see [`results/wp1`](results/wp1/README.md) |
 | WP3 | Does duplicate grouping approximate real patient-level splitting? (figshare dataset with patient IDs and tumour masks) | planned |
 | WP2 | Do newer backbones (ConvNeXt V2, ViT) help under a leakage-free protocol? Multi-seed group CV and calibration | planned |
 
