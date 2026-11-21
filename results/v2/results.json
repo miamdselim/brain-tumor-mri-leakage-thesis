@@ -1,0 +1,437 @@
+{
+  "config": {
+    "DATA_ROOT": "/kaggle/input/datasets/masoudnickparvar/brain-tumor-mri-dataset",
+    "WORK_DIR": "/kaggle/working",
+    "SEED": 42,
+    "IMG_SIZE": 288,
+    "FINGERPRINT_SIZE": 224,
+    "BATCH_SIZE": 32,
+    "PHASH_MAX_DIST": 8,
+    "NCC_MIN": 0.9,
+    "TEST_FOLDS": 7,
+    "VAL_FOLDS": 6,
+    "HEAD_EPOCHS": 12,
+    "HEAD_LR": 0.001,
+    "FT_EPOCHS": 35,
+    "FT_LR": 5e-05,
+    "WARMUP_EPOCHS": 1,
+    "LABEL_SMOOTHING": 0.1,
+    "HEAD_PATIENCE": 4,
+    "FT_PATIENCE": 8,
+    "TTA": true,
+    "BOOTSTRAP_ROUNDS": 1000,
+    "MIXED_PRECISION": true,
+    "N_JOBS": -1,
+    "SMOKE_TEST": false
+  },
+  "environment": {
+    "python": "3.13.15",
+    "tensorflow": "2.20.0",
+    "keras": "3.13.2",
+    "numpy": "2.1.3",
+    "opencv": "4.14.0",
+    "device": "Tesla T4",
+    "mixed_precision": true
+  },
+  "dedup": {
+    "images_found": 7200,
+    "unreadable_removed": 0,
+    "exact_duplicate_links": 187,
+    "near_duplicate_links": 3391,
+    "exact_duplicates_removed": 186,
+    "conflicting_label_images_removed": 11,
+    "final_images": 7003,
+    "final_groups": 5364,
+    "largest_group": 18,
+    "official_test_images": 1600,
+    "official_test_with_exact_copy_in_train": 0,
+    "official_test_with_exact_or_near_duplicate_in_train": 580,
+    "percent_official_test_leaked": 36.25
+  },
+  "selection": {
+    "rule": "highest validation accuracy (TTA); ties broken by lower validation log-loss",
+    "selected_model": "Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion)",
+    "validation_table": [
+      {
+        "Model": "Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion)",
+        "Val accuracy": 0.988036,
+        "Val macro-F1": 0.988142,
+        "Val log-loss": 0.118264
+      },
+      {
+        "Model": "Fusion (EfficientNetV2-B0 + ResNet50V2)",
+        "Val accuracy": 0.986042,
+        "Val macro-F1": 0.986189,
+        "Val log-loss": 0.114251
+      },
+      {
+        "Model": "ResNet50V2",
+        "Val accuracy": 0.985045,
+        "Val macro-F1": 0.985202,
+        "Val log-loss": 0.115518
+      },
+      {
+        "Model": "EfficientNetV2-B0",
+        "Val accuracy": 0.978066,
+        "Val macro-F1": 0.978224,
+        "Val log-loss": 0.136992
+      }
+    ]
+  },
+  "results": {
+    "ResNet50V2": {
+      "model": "ResNet50V2",
+      "test_images": 954,
+      "accuracy": 0.9758909853249476,
+      "accuracy_95ci": [
+        0.9664570230607966,
+        0.9853249475890985
+      ],
+      "balanced_accuracy": 0.9756647114828393,
+      "macro_precision": 0.9766691520189785,
+      "macro_recall": 0.9756647114828393,
+      "macro_f1": 0.9760758182192162,
+      "macro_f1_95ci": [
+        0.9665695153520265,
+        0.9853537643746398
+      ],
+      "weighted_f1": 0.9758664975732388,
+      "macro_specificity": 0.9918835720693837,
+      "cohen_kappa": 0.9678057841599528,
+      "mcc": 0.9678640639459061,
+      "macro_roc_auc": 0.9979409190100226,
+      "log_loss": 0.1335985517988552,
+      "misclassified": 23,
+      "tumours_predicted_as_no_tumour": 1,
+      "inference_ms_per_image": 10.722,
+      "confusion_matrix": [
+        [
+          248,
+          3,
+          1,
+          0
+        ],
+        [
+          6,
+          232,
+          0,
+          5
+        ],
+        [
+          2,
+          2,
+          208,
+          2
+        ],
+        [
+          0,
+          2,
+          0,
+          243
+        ]
+      ],
+      "per_class": {
+        "glioma": {
+          "precision": 0.96875,
+          "recall": 0.9841269841269841,
+          "f1": 0.9763779527559056,
+          "specificity": 0.9886039886039886,
+          "support": 252
+        },
+        "meningioma": {
+          "precision": 0.9707112970711297,
+          "recall": 0.9547325102880658,
+          "f1": 0.9626556016597511,
+          "specificity": 0.9901547116736991,
+          "support": 243
+        },
+        "notumor": {
+          "precision": 0.9952153110047847,
+          "recall": 0.9719626168224299,
+          "f1": 0.983451536643026,
+          "specificity": 0.9986486486486487,
+          "support": 214
+        },
+        "pituitary": {
+          "precision": 0.972,
+          "recall": 0.9918367346938776,
+          "f1": 0.9818181818181818,
+          "specificity": 0.9901269393511989,
+          "support": 245
+        }
+      },
+      "params_total": 24615940,
+      "params_trainable_phase1": 1051140,
+      "params_trainable_phase2": 24570500,
+      "epochs_phase1": 12,
+      "epochs_phase2": 34,
+      "best_epoch_phase1": 11,
+      "best_epoch_phase2": 26,
+      "train_minutes": 60.06
+    },
+    "EfficientNetV2-B0": {
+      "model": "EfficientNetV2-B0",
+      "test_images": 954,
+      "accuracy": 0.9696016771488469,
+      "accuracy_95ci": [
+        0.9570230607966457,
+        0.980083857442348
+      ],
+      "balanced_accuracy": 0.9687947834031501,
+      "macro_precision": 0.9709048744932876,
+      "macro_recall": 0.9687947834031501,
+      "macro_f1": 0.9695719354817737,
+      "macro_f1_95ci": [
+        0.9573453172622903,
+        0.9803728864410539
+      ],
+      "weighted_f1": 0.9695569120980139,
+      "macro_specificity": 0.9897608841215901,
+      "cohen_kappa": 0.9593971058733746,
+      "mcc": 0.9595677477967591,
+      "macro_roc_auc": 0.9983446650946123,
+      "log_loss": 0.14664033514437871,
+      "misclassified": 29,
+      "tumours_predicted_as_no_tumour": 1,
+      "inference_ms_per_image": 29.612,
+      "confusion_matrix": [
+        [
+          248,
+          3,
+          1,
+          0
+        ],
+        [
+          8,
+          231,
+          0,
+          4
+        ],
+        [
+          2,
+          2,
+          203,
+          7
+        ],
+        [
+          0,
+          2,
+          0,
+          243
+        ]
+      ],
+      "per_class": {
+        "glioma": {
+          "precision": 0.9612403100775194,
+          "recall": 0.9841269841269841,
+          "f1": 0.9725490196078431,
+          "specificity": 0.9857549857549858,
+          "support": 252
+        },
+        "meningioma": {
+          "precision": 0.9705882352941176,
+          "recall": 0.9506172839506173,
+          "f1": 0.9604989604989606,
+          "specificity": 0.9901547116736991,
+          "support": 243
+        },
+        "notumor": {
+          "precision": 0.9950980392156863,
+          "recall": 0.9485981308411215,
+          "f1": 0.9712918660287081,
+          "specificity": 0.9986486486486487,
+          "support": 214
+        },
+        "pituitary": {
+          "precision": 0.9566929133858267,
+          "recall": 0.9918367346938776,
+          "f1": 0.9739478957915831,
+          "specificity": 0.9844851904090268,
+          "support": 245
+        }
+      },
+      "params_total": 6577236,
+      "params_trainable_phase1": 657924,
+      "params_trainable_phase2": 6516628,
+      "epochs_phase1": 12,
+      "epochs_phase2": 35,
+      "best_epoch_phase1": 10,
+      "best_epoch_phase2": 34,
+      "train_minutes": 65.19
+    },
+    "Fusion (EfficientNetV2-B0 + ResNet50V2)": {
+      "model": "Fusion (EfficientNetV2-B0 + ResNet50V2)",
+      "test_images": 954,
+      "accuracy": 0.9832285115303984,
+      "accuracy_95ci": [
+        0.9748427672955975,
+        0.9905660377358491
+      ],
+      "balanced_accuracy": 0.9834240284321875,
+      "macro_precision": 0.9836369237033832,
+      "macro_recall": 0.9834240284321875,
+      "macro_f1": 0.9835096399661412,
+      "macro_f1_95ci": [
+        0.9753874234306026,
+        0.9909995827442637
+      ],
+      "weighted_f1": 0.9832141755913646,
+      "macro_specificity": 0.9943604016359815,
+      "cohen_kappa": 0.9776088531871885,
+      "mcc": 0.9776231972558541,
+      "macro_roc_auc": 0.9978951131148487,
+      "log_loss": 0.12397492947274973,
+      "misclassified": 16,
+      "tumours_predicted_as_no_tumour": 1,
+      "inference_ms_per_image": 23.848,
+      "confusion_matrix": [
+        [
+          248,
+          3,
+          1,
+          0
+        ],
+        [
+          4,
+          235,
+          0,
+          4
+        ],
+        [
+          1,
+          0,
+          212,
+          1
+        ],
+        [
+          0,
+          2,
+          0,
+          243
+        ]
+      ],
+      "per_class": {
+        "glioma": {
+          "precision": 0.9802371541501976,
+          "recall": 0.9841269841269841,
+          "f1": 0.9821782178217822,
+          "specificity": 0.9928774928774928,
+          "support": 252
+        },
+        "meningioma": {
+          "precision": 0.9791666666666666,
+          "recall": 0.9670781893004116,
+          "f1": 0.9730848861283644,
+          "specificity": 0.9929676511954993,
+          "support": 243
+        },
+        "notumor": {
+          "precision": 0.9953051643192489,
+          "recall": 0.9906542056074766,
+          "f1": 0.9929742388758782,
+          "specificity": 0.9986486486486487,
+          "support": 214
+        },
+        "pituitary": {
+          "precision": 0.9798387096774194,
+          "recall": 0.9918367346938776,
+          "f1": 0.9858012170385395,
+          "specificity": 0.9929478138222849,
+          "support": 245
+        }
+      },
+      "params_total": 31190612,
+      "params_trainable_phase1": 1706500,
+      "params_trainable_phase2": 31084564,
+      "epochs_phase1": 12,
+      "epochs_phase2": 35,
+      "best_epoch_phase1": 12,
+      "best_epoch_phase2": 29,
+      "train_minutes": 69.78
+    },
+    "Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion)": {
+      "model": "Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion)",
+      "test_images": 954,
+      "accuracy": 0.9779874213836478,
+      "accuracy_95ci": [
+        0.9685534591194969,
+        0.9863731656184487
+      ],
+      "balanced_accuracy": 0.9777223246515636,
+      "macro_precision": 0.9786369051517908,
+      "macro_recall": 0.9777223246515636,
+      "macro_f1": 0.978112255342934,
+      "macro_f1_95ci": [
+        0.968475451196072,
+        0.9866026178041294
+      ],
+      "weighted_f1": 0.9779777655992371,
+      "macro_specificity": 0.9925958227816345,
+      "cohen_kappa": 0.9706060574938121,
+      "mcc": 0.9706474000887301,
+      "macro_roc_auc": 0.9983008190771552,
+      "log_loss": 0.12960695256882102,
+      "misclassified": 21,
+      "tumours_predicted_as_no_tumour": 1,
+      "inference_ms_per_image": 64.183,
+      "confusion_matrix": [
+        [
+          248,
+          3,
+          1,
+          0
+        ],
+        [
+          4,
+          234,
+          0,
+          5
+        ],
+        [
+          2,
+          2,
+          208,
+          2
+        ],
+        [
+          0,
+          2,
+          0,
+          243
+        ]
+      ],
+      "per_class": {
+        "glioma": {
+          "precision": 0.9763779527559056,
+          "recall": 0.9841269841269841,
+          "f1": 0.9802371541501976,
+          "specificity": 0.9914529914529915,
+          "support": 252
+        },
+        "meningioma": {
+          "precision": 0.970954356846473,
+          "recall": 0.9629629629629629,
+          "f1": 0.9669421487603306,
+          "specificity": 0.9901547116736991,
+          "support": 243
+        },
+        "notumor": {
+          "precision": 0.9952153110047847,
+          "recall": 0.9719626168224299,
+          "f1": 0.983451536643026,
+          "specificity": 0.9986486486486487,
+          "support": 214
+        },
+        "pituitary": {
+          "precision": 0.972,
+          "recall": 0.9918367346938776,
+          "f1": 0.9818181818181818,
+          "specificity": 0.9901269393511989,
+          "support": 245
+        }
+      },
+      "params_total": 62383788,
+      "train_minutes": 195.03
+    }
+  }
+}

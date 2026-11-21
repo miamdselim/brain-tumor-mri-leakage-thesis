@@ -1,0 +1,4 @@
+Comparison,only selected correct,only other correct,McNemar exact p
+Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion) vs ResNet50V2,3,1,0.625
+Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion) vs EfficientNetV2-B0,12,4,0.0768
+Ensemble (ResNet50V2 + EfficientNetV2-B0 + Fusion) vs Fusion (EfficientNetV2-B0 + ResNet50V2),0,5,0.0625

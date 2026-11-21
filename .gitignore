@@ -1,0 +1,12 @@
+# data and large artefacts stay out of git
+data/raw/
+processed_images/
+models/
+models_wp1/
+*.keras
+*.h5
+*.npy
+*.zip
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

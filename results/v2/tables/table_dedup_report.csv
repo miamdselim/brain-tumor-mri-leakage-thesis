@@ -1,0 +1,14 @@
+,value
+images_found,7200.0
+unreadable_removed,0.0
+exact_duplicate_links,187.0
+near_duplicate_links,3391.0
+exact_duplicates_removed,186.0
+conflicting_label_images_removed,11.0
+final_images,7003.0
+final_groups,5364.0
+largest_group,18.0
+official_test_images,1600.0
+official_test_with_exact_copy_in_train,0.0
+official_test_with_exact_or_near_duplicate_in_train,580.0
+percent_official_test_leaked,36.25

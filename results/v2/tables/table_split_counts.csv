@@ -1,0 +1,6 @@
+label,train,val,test,Total
+glioma,1290,240,252,1782
+meningioma,1277,258,243,1778
+notumor,1220,247,214,1681
+pituitary,1259,258,245,1762
+Total,5046,1003,954,7003

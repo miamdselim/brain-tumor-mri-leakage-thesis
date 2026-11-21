@@ -1,0 +1,333 @@
+TY  - JOUR
+AU  - D. N. Louis
+AU  - A. Perry
+AU  - P. Wesseling
+TI  - The 2021 WHO classification of tumors of the central nervous system: A summary
+PY  - 2021
+JO  - Neuro-Oncology
+VL  - 23
+IS  - 8
+SP  - 1231
+EP  - 1251
+ID  - louis
+ER  - 
+
+TY  - JOUR
+AU  - C. K. K. Reddy
+AU  - P. A. Reddy
+AU  - H. Janapati
+AU  - B. Assiri
+AU  - M. Shuaib
+AU  - S. Alam
+AU  - A. Sheneamer
+TI  - A fine-tuned vision transformer based enhanced multi-class brain tumor classification using MRI scan imagery
+PY  - 2024
+JO  - Frontiers in Oncology
+VL  - 14
+SP  - 1400341
+ID  - reddy
+ER  - 
+
+TY  - JOUR
+AU  - F. Celik
+AU  - K. Celik
+AU  - A. Celik
+TI  - Enhancing brain tumor classification through ensemble attention mechanism
+PY  - 2024
+JO  - Scientific Reports
+VL  - 14
+SP  - 22260
+ID  - celik
+ER  - 
+
+TY  - JOUR
+AU  - M. A. Talukder
+AU  - M. M. Islam
+AU  - M. A. Uddin
+TI  - A deep ensemble learning framework for brain tumor classification using data balancing and fine-tuning
+PY  - 2025
+JO  - Scientific Reports
+VL  - 15
+SP  - 35251
+ID  - talukder
+ER  - 
+
+TY  - JOUR
+AU  - W. Chen
+AU  - X. Tan
+AU  - J. Zhang
+AU  - G. Du
+AU  - Q. Fu
+AU  - H. Jiang
+TI  - MLG: A mixed local and global model for brain tumor classification
+PY  - 2025
+JO  - Frontiers in Neuroscience
+VL  - 19
+SP  - 1618514
+ID  - chen_mlg
+ER  - 
+
+TY  - JOUR
+AU  - W. Chen
+AU  - J. Liu
+AU  - X. Tan
+AU  - J. Zhang
+AU  - G. Du
+AU  - Q. Fu
+AU  - H. Jiang
+TI  - EnSLDe: An enhanced short-range and long-range dependent system for brain tumor classification
+PY  - 2025
+JO  - Frontiers in Oncology
+VL  - 15
+SP  - 1512739
+ID  - chen_ensl
+ER  - 
+
+TY  - JOUR
+AU  - R. Singh
+TI  - Advanced dynamic ensemble framework with explainability driven insights for precision brain tumor classification across datasets
+PY  - 2025
+JO  - Scientific Reports
+VL  - 15
+SP  - 29090
+ID  - singh
+ER  - 
+
+TY  - JOUR
+AU  - E. Yagis
+AU  - S. W. Atnafu
+AU  - A. García Seco de Herrera
+TI  - Effect of data leakage in brain MRI classification using 2D convolutional neural networks
+PY  - 2021
+JO  - Scientific Reports
+VL  - 11
+SP  - 22544
+ID  - yagis
+ER  - 
+
+TY  - JOUR
+AU  - M. M. Badža
+AU  - M. Č. Barjaktarović
+TI  - Classification of brain tumors from MRI images using a convolutional neural network
+PY  - 2020
+JO  - Applied Sciences
+VL  - 10
+IS  - 6
+SP  - 1999
+ID  - badza
+ER  - 
+
+TY  - JOUR
+AU  - M. Rosenblatt
+AU  - L. Tejavibulya
+AU  - R. Jiang
+AU  - S. Noble
+AU  - D. Scheinost
+TI  - Data leakage inflates prediction performance in connectome-based machine learning models
+PY  - 2024
+JO  - Nature Communications
+VL  - 15
+SP  - 1829
+ID  - rosenblatt
+ER  - 
+
+TY  - JOUR
+AU  - S. Kapoor
+AU  - A. Narayanan
+TI  - Leakage and the reproducibility crisis in machine-learning-based science
+PY  - 2023
+JO  - Patterns
+VL  - 4
+IS  - 9
+SP  - 100804
+ID  - kapoor
+ER  - 
+
+TY  - JOUR
+AU  - G. Varoquaux
+AU  - V. Cheplygina
+TI  - Machine learning for medical imaging: Methodological failures and recommendations for the future
+PY  - 2022
+JO  - npj Digital Medicine
+VL  - 5
+SP  - 48
+ID  - varoquaux
+ER  - 
+
+TY  - JOUR
+AU  - M. Roberts
+AU  - D. Driggs
+AU  - M. Thorpe
+TI  - Common pitfalls and recommendations for using machine learning to detect and prognosticate for COVID-19 using chest radiographs and CT scans
+PY  - 2021
+JO  - Nature Machine Intelligence
+VL  - 3
+SP  - 199
+EP  - 217
+ID  - roberts
+ER  - 
+
+TY  - JOUR
+AU  - J. Wang
+AU  - S.-Y. Lu
+AU  - S.-H. Wang
+AU  - Y.-D. Zhang
+TI  - RanMerFormer: Randomized vision transformer with token merging for brain tumor classification
+PY  - 2024
+JO  - Neurocomputing
+VL  - 573
+SP  - 127216
+ID  - wang_ranmer
+ER  - 
+
+TY  - JOUR
+AU  - A. S. Sambyal
+AU  - U. Niyaz
+AU  - N. C. Krishnan
+AU  - D. R. Bathula
+TI  - Understanding calibration of deep neural networks for medical image classification
+PY  - 2023
+JO  - Computer Methods and Programs in Biomedicine
+VL  - 242
+SP  - 107816
+ID  - sambyal
+ER  - 
+
+TY  - JOUR
+AU  - T. Hussain
+AU  - H. Shouno
+TI  - Explainable deep learning approach for multi-class brain magnetic resonance imaging tumor classification and localization using gradient-weighted class activation mapping
+PY  - 2023
+JO  - Information
+VL  - 14
+IS  - 12
+SP  - 642
+ID  - hussain
+ER  - 
+
+TY  - JOUR
+AU  - S. Bouhafra
+AU  - H. El Bahi
+TI  - Deep learning approaches for brain tumor detection and classification using MRI images (2020 to 2024): A systematic review
+PY  - 2025
+JO  - Journal of Imaging Informatics in Medicine
+VL  - 38
+IS  - 3
+SP  - 1403
+EP  - 1433
+ID  - bouhafra
+ER  - 
+
+TY  - CONF
+AU  - M. Tan
+AU  - Q. V. Le
+TI  - EfficientNetV2: Smaller models and faster training
+PY  - 2021
+T2  - Proc. 38th Int. Conf. Machine Learning (ICML)
+SP  - 10096
+EP  - 10106
+ID  - tan
+ER  - 
+
+TY  - CONF
+AU  - A. Dosovitskiy
+AU  - L. Beyer
+AU  - A. Kolesnikov
+TI  - An image is worth 16x16 words: Transformers for image recognition at scale
+PY  - 2021
+T2  - Proc. Int. Conf. Learning Representations (ICLR)
+ID  - dosovitskiy
+ER  - 
+
+TY  - CONF
+AU  - S. Woo
+AU  - S. Debnath
+AU  - R. Hu
+AU  - X. Chen
+AU  - Z. Liu
+AU  - I. S. Kweon
+AU  - S. Xie
+TI  - ConvNeXt V2: Co-designing and scaling ConvNets with masked autoencoders
+PY  - 2023
+T2  - Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition (CVPR)
+SP  - 16133
+EP  - 16142
+ID  - woo
+ER  - 
+
+TY  - DATA
+AU  - M. Nickparvar
+TI  - Brain Tumor MRI Dataset (Version 2)
+PY  - 2021
+T2  - Kaggle
+UR  - https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
+ID  - nickparvar
+ER  - 
+
+TY  - JOUR
+AU  - B. Lambert
+AU  - F. Forbes
+AU  - A. Tucholka
+AU  - S. Doyle
+AU  - H. Dehaene
+AU  - M. Dojat
+TI  - Trustworthy clinical AI solutions: A unified review of uncertainty quantification in deep learning models for medical image analysis
+PY  - 2024
+JO  - Artificial Intelligence in Medicine
+VL  - 150
+SP  - 102830
+ID  - lambert
+ER  - 
+
+TY  - CONF
+AU  - T. Truong
+AU  - F. Khun Jush
+AU  - M. Lenga
+TI  - Benchmarking pretrained vision embeddings for near- and duplicate detection in medical images
+PY  - 2024
+T2  - Proc. IEEE Int. Symp. Biomedical Imaging (ISBI)
+ID  - truong
+ER  - 
+
+TY  - JOUR
+AU  - A. A. Asiri
+AU  - A. Shaf
+AU  - T. Ali
+TI  - Advancing brain tumor classification through fine-tuned vision transformers: A comparative study of pre-trained models
+PY  - 2023
+JO  - Sensors
+VL  - 23
+IS  - 18
+SP  - 7913
+ID  - asiri
+ER  - 
+
+TY  - JOUR
+AU  - Z. Wang
+AU  - C. He
+AU  - Y. Hu
+AU  - H. Luo
+AU  - C. Li
+AU  - X. Wu
+AU  - Y. Zhang
+AU  - J. Li
+AU  - J. Cai
+TI  - A hybrid deep learning scheme for MRI-based preliminary multiclassification diagnosis of primary brain tumors
+PY  - 2024
+JO  - Frontiers in Oncology
+VL  - 14
+SP  - 1363756
+ID  - wang_hybrid
+ER  - 
+
+TY  - JOUR
+AU  - D. Shi
+AU  - M. Yang
+AU  - M. Dong
+TI  - Development and validation of a deep learning model using MR imaging for predicting brain metastases: An accuracy-focused study
+PY  - 2025
+JO  - Frontiers in Oncology
+VL  - 15
+SP  - 1657604
+ID  - shi
+ER  - 
