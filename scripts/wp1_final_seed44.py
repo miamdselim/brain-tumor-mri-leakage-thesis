@@ -624,19 +624,6 @@ def plot_history(hist, k):
 
 # %%
 # ============================================================
-# CELL 8 — Train the same model under each protocol (≈ 35–45 min per protocol on a T4)
-# ============================================================
-CNN = {}
-for k in SPLITS:
-    probs, vprobs, hist, minutes = train_and_predict(k)
-    CNN[k] = {"probs": probs, "val_probs": vprobs, "minutes": minutes}
-    plot_history(hist, k)
-    yt = label_ids(SPLITS[k][SPLITS[k].split == "test"])
-    print(f"   [{PROTOCOLS[k]}] test accuracy = {100*accuracy_score(yt, probs.argmax(1)):.2f}% "
-          f"({minutes} min)")
-    np.save(os.path.join(TAB_DIR, f"test_probs_protocol_{k}.npy"), probs)
-# %%
-# ============================================================
 # CELL 7b — Second memoriser: 1-NN on frozen ImageNet features (no training on MRI)
 #   Pixel matching (CELL 6) only finds near-identical images; ImageNet features also find
 #   images that look alike after small shifts, crops or contrast changes.
