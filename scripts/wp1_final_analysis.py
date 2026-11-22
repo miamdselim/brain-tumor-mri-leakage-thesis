@@ -68,6 +68,15 @@ missing = [(k, s) for k in PROTOCOLS for s in SEEDS if not ((P.protocol == k) & 
 if missing:
     print("⚠️ Missing runs:", missing)
 P["cnn_ok"] = P.cnn_pred == P.y
+# Path relative to the dataset root (runs may use different copies of the same dataset)
+P["img_key"] = P.src_path.str.replace(r"^.*?[/\\](training|testing)[/\\]",
+                                      lambda m: m.group(1).lower() + "/", case=False, regex=True)
+# Check that every seed used exactly the same split for each protocol
+for k in sorted(P.protocol.unique()):
+    sets = {s_: frozenset(zip(g.img_key, g.split)) for s_, g in P[P.protocol == k].groupby("run_seed")}
+    same = len(set(sets.values())) == 1
+    print(f"Protocol {k}: identical split in all seeds -> {same}")
+    assert same, f"Protocol {k}: the seeds used different splits"
 T = P[P.split == "test"].copy()
 T["nn_pixel_ok"] = T.nn_pixel_pred == T.y
 T["nn_feat_ok"] = T.nn_feat_pred == T.y
@@ -205,7 +214,7 @@ def cmh_p(df, ok_col):
 leak_rows, per_class_rows = [], []
 for k in ("A", "B"):
     g = T[T.protocol == k]
-    img = (g.groupby("src_path").agg(label=("label", "first"), dup_in_dev=("dup_in_dev", "first"),
+    img = (g.groupby("img_key").agg(label=("label", "first"), dup_in_dev=("dup_in_dev", "first"),
                                      cnn_ok=("cnn_ok", "mean"), nn_pixel_ok=("nn_pixel_ok", "first"),
                                      nn_feat_ok=("nn_feat_ok", "first")).reset_index())
     for col, model in [("cnn_ok", f"Fusion CNN (mean of {len(SEEDS)} seeds)"),
