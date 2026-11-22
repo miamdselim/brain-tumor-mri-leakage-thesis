@@ -28,7 +28,9 @@ Full numbers are in [`results/v2/results.json`](results/v2/results.json).
 ```
 notebooks/   Kaggle notebooks (run these)
   01_v2_leakage_free_ensemble.ipynb   de-duplication audit + 3 models + ensemble (paper results)
-  02_wp1_leaky_vs_clean_split.ipynb   WP1: same model under official / random / group-aware splits
+  02_wp1_leaky_vs_clean_split.ipynb   WP1 first run (seed 42; results in results/wp1)
+  03_wp1_final_seed42/43/44.ipynb     WP1 final: three training seeds, every prediction saved
+  04_wp1_final_analysis.ipynb         WP1 final analysis on CPU: mean ± SD, class-controlled tests
 scripts/     the same notebooks as plain Python (# %% cells) + to_ipynb.py converter
 results/     outputs of each finished run (results.json, tables, figures)
 data/        how to obtain the dataset (images are not stored in git)
@@ -40,7 +42,7 @@ references/  references.bib and references.ris (import into Zotero)
 
 | WP | Question | Status |
 |---|---|---|
-| WP1 | How much does leakage inflate accuracy? (official vs random vs group-aware split) | done — see [`results/wp1`](results/wp1/README.md) |
+| WP1 | How much does leakage inflate accuracy? (official vs random vs group-aware split) | first run done ([`results/wp1`](results/wp1/README.md)); final 3-seed run ready (notebooks 03–04) |
 | WP3 | Does duplicate grouping approximate real patient-level splitting? (figshare dataset with patient IDs and tumour masks) | planned |
 | WP2 | Do newer backbones (ConvNeXt V2, ViT) help under a leakage-free protocol? Multi-seed group CV and calibration | planned |
 
